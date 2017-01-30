@@ -1,6 +1,6 @@
 {
-    "name": "calderawp/laravel-newsletter",
-    "description": "manage MailChimp segmentsin Laravel 5",
+    "name": "calderawp/laravel-mailchimp-segment",
+    "description": "manage MailChimp segments in Laravel",
     "keywords": [
         "laravel",
         "newsletter",
