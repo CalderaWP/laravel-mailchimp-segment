@@ -2,7 +2,6 @@
 
 namespace calderawp\mailchimp\segments;
 use Illuminate\Support\ServiceProvider;
-use \DrewM\MailChimp\MailChimp as API;
 
 /**
  * Class ListServiceProvider
@@ -10,10 +9,11 @@ use \DrewM\MailChimp\MailChimp as API;
  */
 class ListServiceProvider extends ServiceProvider {
 
+	protected $defer = true;
 	public function register() {
 		$this->app->singleton( MailChimp::class, function () {
-			$api = new API(config('mailchimp-segments.apiKey'));
-			return new Lists( $api );
+			return Factory::lists( config('mailchimp-segments.apiKey') );
+
 		} );
 	}
 

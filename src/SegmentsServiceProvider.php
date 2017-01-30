@@ -2,7 +2,6 @@
 
 namespace calderawp\mailchimp\segments;
 use calderawp\segmentor\Providers\ServiceProvider;
-use \DrewM\MailChimp\MailChimp as API;
 
 
 /**
@@ -14,11 +13,11 @@ use \DrewM\MailChimp\MailChimp as API;
  */
 class SegmentsServiceProvider  extends ServiceProvider {
 
+	protected $defer = true;
 
 	public function register() {
 		$this->app->singleton( MailChimp::class, function () {
-			$api = new API(config('mailchimp-segments.apiKey'));
-			return new Segments( $api );
+			return Factory::segments( config('mailchimp-segments.apiKey') );
 		} );
 	}
 

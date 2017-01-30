@@ -17,7 +17,7 @@ class PackageServiceProvider  extends ServiceProvider
 
 	protected $packageServices = [
 		\calderawp\mailchimp\segments\ListServiceProvider::class,
-		\calderawp\mailchimp\segments\PackageServiceProvider::class
+		\calderawp\mailchimp\segments\SegmentsServiceProvider::class
 	];
 
 	public function boot()
@@ -30,32 +30,12 @@ class PackageServiceProvider  extends ServiceProvider
 
 	public function register()
 	{
-		$this->registerProviders( $this->packageServices );
-	}
-
-	/**
-	 * Register a service provider.
-	 *
-	 * @param  \Illuminate\Support\ServiceProvider|string  $provider
-	 * @param  array                                       $options
-	 * @param  bool                                        $force
-	 *
-	 * @return \Illuminate\Support\ServiceProvider
-	 */
-	protected function registerProvider($provider, array $options = [], $force = false)
-	{
-		return $this->app->registerDeferredProvider($provider, $options, $force);
-	}
-
-	/**
-	 * Register multiple service providers.
-	 *
-	 * @param  array  $providers
-	 */
-	protected function registerProviders(array $providers)
-	{
-		foreach ($providers as $provider) {
-			$this->registerProvider($provider);
+		foreach ( $this->packageServices as $provider) {
+			 $this->app->registerDeferredProvider($provider);
 		}
 	}
+
+
+
+
 }
