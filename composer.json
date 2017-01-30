@@ -1,0 +1,28 @@
+{
+    "name": "calderawp/laravel-newsletter",
+    "description": "manage MailChimp segmentsin Laravel 5",
+    "keywords": [
+        "laravel",
+        "newsletter",
+        "mailchimp"
+    ],
+    "license": "GPLv2+",
+    "authors": [
+        {
+            "name": "Josh Pollock",
+            "email": "josh@calderawp.com",
+            "homepage": "https://joshpress.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "~5.6|~7.0",
+        "drewm/mailchimp-api": "^2.1"
+    },
+   
+    "autoload": {
+        "psr-4": {
+            "calderawp\\mailchimp\\segments": "src"
+        }
+    }
+}
