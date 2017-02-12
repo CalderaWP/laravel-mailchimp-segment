@@ -39,7 +39,7 @@ class Lists extends MailChimp {
 	 */
 	public function getListIds() : array
 	{
-		return $this->listReduce( [ 'id' ] );
+		return $this->listReduce( 'id' );
 
 	}
 
@@ -50,7 +50,7 @@ class Lists extends MailChimp {
 	 */
 	public function getListNames() : array
 	{
-		return $this->listReduce( [ 'name' ] );
+		return $this->listReduce( 'name' );
 
 	}
 
