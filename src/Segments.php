@@ -16,24 +16,30 @@ class Segments extends MailChimp {
 	/**
 	 * GET All segments for a list
 	 *
-	 * @param int $listId
+	 * @param string $listId
 	 *
-	 * @return array|false
+	 * @return array
 	 */
-	public function segments( int $listId )
+	public function segments( string $listId ) : array
 	{
-		return $this->api->get( "lists/$listId/segments" );
+		$segments = [];
+		$r =  $this->api->get( "lists/$listId/segments" );
+		if( isset( $r[ 'segments' ] ) ){
+			$segments = $r[ 'segments' ];
+		}
+
+		return $segments;
 	}
 
 	/**
 	 * GET A segment
 	 *
-	 * @param int $listId
-	 * @param int $segmentId
+	 * @param string $listId
+	 * @param string $segmentId
 	 *
 	 * @return array|false
 	 */
-	public function segment( int $listId, int $segmentId  )
+	public function segment( string $listId, string $segmentId  )
 	{
 		return $this->api->get( "lists/$listId/segments/$segmentId" );
 	}
@@ -41,13 +47,13 @@ class Segments extends MailChimp {
 	/**
 	 * Create a segment
 	 *
-	 * @param int $listId
+	 * @param string $listId
 	 * @param array $emails
 	 * @param string $name
 	 *
 	 * @return array|false
 	 */
-	public function create( int $listId, array $emails, string  $name )
+	public function create( string $listId, array $emails, string  $name )
 	{
 		return $this->api->post( "lists/$listId/segments",[
 			'static_segment' => $emails,

@@ -18,7 +18,7 @@ class Factory {
 	 *
 	 * @return MailChimp
 	 */
-	public static function api( $key )
+	public static function api( $key  )
 	{
 		return new MailChimp( $key );
 	}
