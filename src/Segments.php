@@ -64,33 +64,51 @@ class Segments extends MailChimp {
 	/**
 	 * Add emails to a segment
 	 *
-	 * @param int $listId
+	 * @param string $listId
 	 * @param int $segmentId
 	 * @param array $emails
 	 *
 	 * @return array|false
 	 */
-	public function add( int $listId, int $segmentId, array $emails )
+	public function add( string $listId, int $segmentId, array $emails )
 	{
 		return $this->api->post( "lists/$listId/segments/$segmentId",[
-			'members_to_add' => $emails
+			'members_to_add' => array_values( $emails )
 		]);
 	}
 
 	/**
 	 * Remove emails from a segment
 	 *
-	 * @param int $listId
+	 * @param string $listId
 	 * @param int $segmentId
 	 * @param array $emails
 	 *
 	 * @return array|false
 	 */
-	public function remove( int $listId, int $segmentId, array $emails )
+	public function remove( string $listId, int $segmentId, array $emails )
 	{
 		return $this->api->post( "lists/$listId/segments/$segmentId",[
-			'members_to_remove' => $emails
+			'members_to_remove' => array_values( $emails )
 		]);
+	}
+
+	/**
+	 * Get list members
+	 *
+	 * @param string $listId
+	 * @param int $segmentId
+	 *
+	 * @return array
+	 */
+	public function members( string  $listId, int $segmentId ) : array
+	{
+		$members = [];
+		$r = $this->api->get("lists/$listId/segments/$segmentId/members" );
+		if( isset( $r[ 'members' ] ) ){
+			$members = $r[ 'members' ];
+		}
+		return $members;
 	}
 
 	public function delete( int $listId, int $segmentId )

@@ -18,7 +18,7 @@ class Factory {
 	 *
 	 * @return MailChimp
 	 */
-	public static function api( $key  )
+	public static function api( $key  ) : MailChimp
 	{
 		return new MailChimp( $key );
 	}
@@ -28,7 +28,7 @@ class Factory {
 	 *
 	 * @return Lists
 	 */
-	public static function lists( $key )
+	public static function lists( $key ) : Lists
 	{
 		return new Lists( static::api( $key ) );
 	}
@@ -38,8 +38,20 @@ class Factory {
 	 *
 	 * @return Segments
 	 */
-	public static function segments( $key )
+	public static function segments( $key ) : Segments
 	{
 		return new Segments( static::api( $key ) );
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $listId
+	 * @param int $segmentId
+	 *
+	 * @return Segment
+	 */
+	public static function segment( string $key, string $listId, int $segmentId ) : Segment
+	{
+		return new Segment( static::segments( $key ), $segmentId, $listId );
 	}
 }
