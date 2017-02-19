@@ -18,11 +18,18 @@ class Factory {
 	 *
 	 * @return MailChimp
 	 */
-	public static function api( $key  ) : MailChimp
+	public static function api( $key = null  ) : MailChimp
 	{
+		if( ! $key ){
+			$key = static::getKey();
+		}
 		return new MailChimp( $key );
 	}
 
+	protected static function getKey() : string
+	{
+		return config('mailchimp-segments.apiKey');
+	}
 	/**
 	 * @param $key
 	 *
@@ -38,8 +45,11 @@ class Factory {
 	 *
 	 * @return Segments
 	 */
-	public static function segments( $key ) : Segments
+	public static function segments( $key = null ) : Segments
 	{
+		if( ! $key ){
+			$key = static::getKey();
+		}
 		return new Segments( static::api( $key ) );
 	}
 
@@ -50,8 +60,11 @@ class Factory {
 	 *
 	 * @return Segment
 	 */
-	public static function segment( string $key, string $listId, int $segmentId ) : Segment
+	public static function segment(  $key = null, string $listId, int $segmentId ) : Segment
 	{
+		if( ! $key ){
+			$key = static::getKey();
+		}
 		return new Segment( static::segments( $key ), $segmentId, $listId );
 	}
 }
